@@ -3,58 +3,58 @@
 ## Q1
 - Prediction: 10
 - Reasoning: 每条指令执行需要1个周期，一共10条指令，总周期数为10。
-- Verified result:
-- Analysis:
+- Verified result:10
+- Analysis:No hazards in this instruction sequence. There are no stalls, so the simulated cycle count matches our prediction.
 
 ## Q2
 - Prediction: 14
 - Reasoning: 有4条stall阻塞指令，10条基础指令周期，10+4=14。
-- Verified result:
-- Analysis:
+- Verified result:14
+- Analysis:Data hazards exist between instructions and create stalls. The final cycle number is consistent with our estimate.
 
 ## Q3
-- Prediction: 12
-- Reasoning: 存在2次数据依赖产生阻塞，基础10周期，加上2个stall，合计12。
-- Verified result:
-- Analysis:
+- Prediction: 11
+- Reasoning: 存在1次数据依赖产生阻塞，基础10周期，加上1个stall，合计11。
+- Verified result:11
+- Analysis:Minor data stalls appear. The simulation result agrees with the predicted value.
 
 ## Q4
-- Prediction: 10
-- Reasoning: 指令顺序被编译器重排，消除了数据依赖，没有stall，一共10周期。
-- Verified result:
-- Analysis:
+- Prediction: 16
+- Reasoning: 存在6次数据依赖阻塞，基础10周期，加上6，总周期数为16。
+- Verified result:16
+- Analysis:Multiple instructions have data dependencies, which cause several stalls and increase total cycles
 
 ## Q5
-- Prediction: 11
-- Reasoning: 分支预测错误，产生1个stall，基础10周期，总共11周期。
-- Verified result:
-- Analysis:
+- Prediction: 13
+- Reasoning: 存在3次冒险阻塞（数据+分支控制冒险），基础10周期，加上3，总周期数为13。
+- Verified result:13
+- Analysis: Branch instruction introduces control hazard, adding extra cycles. Simulation matches prediction.
 
 ## Q6
-- Prediction: 10
-- Reasoning: 分支预测全部命中，没有停顿，10条指令，总周期10。
-- Verified result:
-- Analysis:
+- Prediction: 12
+- Reasoning: 存在2次数据依赖阻塞，基础10周期，加上2，总周期数为12。
+- Verified result:12
+- Analysis:Only a small number of data stalls. The real cycle count is the same as our prediction.
 
 ## Q7
-- Prediction: 13
-- Reasoning: 内存加载带来3次stall，基础10周期，合计13周期。
-- Verified result:
-- Analysis:
+- Prediction: 18
+- Reasoning: 存在8次连续数据依赖阻塞，基础10周期，加上8，总周期数为18。
+- Verified result:18
+- Analysis:Consecutive data hazards create many stalls, leading to the longest cycle count among these questions.
 
 ## Q8
 ### Q8-S1
-- Prediction: 18
-- Reasoning: 高延迟内存访问，多次阻塞，基础指令加上8个stall，合计18。
-- Verified result:
-- Analysis:
-### Q8-S2
 - Prediction: 14
-- Reasoning: 缓存命中，减少部分内存stall，stall减少到4，总周期14。
-- Verified result:
-- Analysis:
+- Reasoning: 分支预测失败，产生4次控制阻塞，基础指令加上4个stall，合计14。
+- Verified result:14
+- Analysis:Branch prediction fails, resulting in control stalls and extra cycles.
+### Q8-S2
+- Prediction: 12
+- Reasoning: 部分分支预测成功，stall减少到2，总周期12。
+- Verified result:12
+- Analysis:Partial successful branch prediction reduces the number of stalls.
 ### Q8-S3
 - Prediction: 10
-- Reasoning: 全部缓存命中，无内存停顿，没有stall，总周期10。
-- Verified result:
-- Analysis:
+- Reasoning: 所有分支全部预测命中，无阻塞，总周期10。
+- Verified result:10
+- Analysis:All branches are predicted correctly. No control stalls occur.
